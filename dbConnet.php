@@ -48,6 +48,27 @@ class DbConnect extends Database{
     
     } 
 
-}
 
+        function Inscription($emailAdmin, $mdp_admin) {
+        $sql = "INSERT INTO `admin` (`email_admin`, `mdp_admin`) VALUES (:email_admin, :mdp_admin)";
+        $stmt = $this->dbConnect->prepare($sql);
+        $stmt->bindValue('email_admin', $emailAdmin);
+        $stmt->bindValue('mdp_admin', password_hash($mdp_admin, PASSWORD_DEFAULT)); 
+        $res = $stmt->execute();
 
+        if ($res){
+            echo "Inscription réussie";
+        }
+    }
+    
+
+        function Connexion($emailAdmin, $mdp_admin) {
+        $sql = "SELECT * FROM `admin` WHERE email_admin = :email_admin" ;
+        $stmt = $this->dbConnect->prepare($sql);
+        $stmt->bindValue(':email_admin', $emailAdmin);
+        $stmt->execute();
+        $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    } 
+    
+} 

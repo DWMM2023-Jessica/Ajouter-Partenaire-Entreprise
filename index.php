@@ -24,100 +24,110 @@ $db = new dbConnect;
 <?php
  
 
-            echo '<form action = ""  method="POST" >';
-                echo '<p>Nom du Partenaire</p><input type="text" name="nom_collab">';
-                echo '<p>Logo du Partenaire</p><input type="url" name="logo_collab">';
-                echo '<br>';
-                echo '<br>';
-                echo '<input type="submit" name="submitPartenaire" value="Ajouter partenaire">';
-            echo '</form>';
+//  ?>
 
+// <div class="blocDevis">
+//     <div class="barreLogo">
+//         <img class="logoJessica" src="Logojessica.png" alt="Logo_site_jessica">
+//     </div>
+//     <div class="formulaire">
+//         <form class="form" method="POST">
+//             <p class="phraseTitreDevis">Vos devis garantie sous 15 jours*</p>
 
-            if (isset($_POST["submitPartenaire"])) {
-                $nomCollab = $_POST['nom_collab'];
-                $logoCollab = $_POST['logo_collab'];
-            
-                
-                $db->insertPartenaire($nomCollab, $logoCollab);
+//             <label for="nom">Nom</label><br>
+//             <input type="text" name="nom" placeholder="Veuillez indiquer nom"><br>
 
-            }
+//             <label for="prenom">Prénom</label><br>
+//             <input type="text" name="prenom" placeholder="Veuillez indiquer prénom"><br>
 
+//             <label for="email">Email</label><br>
+//             <input type="email" name="email" placeholder="Veuillez indiquer adresse email"><br>
 
+//             <label for="ville">Ville</label><br>
+//             <input type="text" name="ville" placeholder="Veuillez indiquer la ville du chantier"><br>
 
-            echo '<br>';
-            echo '<br>';
-            echo '<br>';
-            echo '<form class="form" method="POST">';
-            echo '<p>Nom Entreprise</p><input type="text" name="entreprise">';
-            echo '<p>Logo Entreprise</p><input type="url" name="logo_entreprise">';
-            echo '<br>';
-            echo '<br>';
-            echo '<input type="submit" name="submitEntreprise" value="Ajouter entreprise">';
-            echo '</form>';
+//             <label for="typeTravaux">Quel type de travaux ?</label><br>
+//             <input type="text" name="typeTravaux" placeholder="Veuillez indiquer les travaux à effectuer"><br>
 
-            if (isset($_POST["submitEntreprise"])) {
-                $nomCollab2 = $_POST['entreprise'];
-                $logoCollab2 = $_POST['logo_entreprise'];
-            
-                
-                $db->insertEntreprise($nomCollab2, $logoCollab2);
+//             <label for="date">Date souhaitée des travaux</label><br>
+//             <input type="date" name="date"><br>
 
-            }
- ?>
+//             <label for="description">Description précise de votre projet</label><br>
+//             <textarea class="description" name="description" rows="4" cols="50"></textarea><br>
 
-<div class="blocDevis">
-        <div class="barreLogo">
-            <img class="logoJessica" src="Logojessica.png" alt="Logo_site_jessica">
-        </div>
-        <div class="formulaire">
-            <p class="phraseTitreDevis">Vos devis garantie sous 15 jours*</p>
-            <label for="">Nom</label>
-            <br>
-            <input type="text" placeholder="Veuillez indiquer nom"><br>
-            <label for="">Prénom</label>
-            <br>
-            <input type="text" placeholder="Veuillez indiquer prénom"><br>
-            <label for="">Email</label>
-            <br>
-            <input type="text" placeholder="Veuillez indiquer adresse email"><br>
-            <label for="">Ville</label>
-            <br>
-            <input type="text" placeholder="Veuillez indiquer la ville du chantier"><br>
-            <label for="">Quel type de travaux ?</label>
-            <br>
-            <input type="text" placeholder="Veuillez indiquer les travaux à effectuer"><br>
-            <label for="">Date souhaitée des travaux</label>
-            <br>
-            <input type="date"><br>
-            <label for="">Description précise de votre projet</label>
-            <br>
-            <input class="description" type="text"><br>
+//             <input type="submit" name="submitDevis" value="Envoyer devis">
+//             <p class="condition">*: Devis gratuit sur une distance de 50km</p>
+//         </form>
+//     </div>
+// </div>
 
-            <input  type="submit" name="submitDevis" value="Submit Devis">
-            <p class="condition">*: Devis gratuit sur une distance de 50km</p>
-        </div>
-    </div>
-
-    <?php
-
-
-
-
-    // $to = "amadou.haidara@gmail.com";
-    // $subject = "Demande de devis depuis le formulaire";
-    // $message = "Nom: " . $_POST['nom'] . "\n";
-    // $message .= "Prénom: " . $_POST['prenom'] . "\n";
-
-
-    // $headers = "From: " . $_POST['email'] . "\r\n";
-
-
-    // mail($to, $subject, $message, $headers);
 
   
-        mail("amadou.haidara@gmail.com" , "Essai", ) ;   
+
+
+
+
+    <form method="POST" >
+
+        <input type="email" placeholder="Email" name="email_admin"><br>
+        <input type="password" placeholder="Mot de passe" name="mdp_admin"><br>
+        <button type="submitInscription">Incription</button>
+
+
+    </form>
+
+    <form method="POST">
+
+        <input type="email" placeholder="Email" name="email_admin"><br>
+        <input type="password" placeholder="Mot de passe" name="mdp_admin"><br>
+        <button type="submitConnexion">Connexion</button>
+
+    </form>
+
+
+
+ <?php
+
+//  *********************************INSCRIPTION*******************************************************************
+
+    if (!empty($_POST['email_admin']) && !empty($_POST['mdp_admin'])){
+        $emailAdmin = $_POST['email_admin'];
+        $mdp_admin = $_POST['mdp_admin'];
+
+        $db->Inscription($emailAdmin, $mdp_admin);
+
+       header("Refresh:0");
+
+    }
+
+  
+
+
+//  *********************************CONNEXION*******************************************************************
+?>
+
+ <?php
+
+    if (!empty($_POST['email_admin']) && !empty($_POST['mdp_admin'])){
+        $emailAdmin = $_POST['email_admin'];
+        $mdp_admin = $_POST['mdp_admin'];
+
+        $db->Connexion($emailAdmin, $mdp_admin);
+
+        header("Refresh:0");
+
+    }
 
 ?>
+
+
+
+
+
+
+
+  
+
 </section>
 
 
